@@ -1,0 +1,107 @@
+
+---- Modify Mean_v1 and introduce classes ----
+
+Replace the struct "Event" with a class "Event" and 
+the function "add" with a class "MassMean", as described in the following.
+
+The invariant mass rms is computed from the difference of very similar
+numbers, so the limited precision has a non negligible effect. To solve
+this problems apply one or both of the suggestions given for particleMean_v1.
+
+***
+Create a class "Event" with the same members as the previous struct "Event":
+declare those members private. Include an additional const private member,
+to contain the maximum number of particles (10).
+Add to the class:
+- a constructor taking as parameters the event-id and the decay point
+  coordinates,
+- a destructor,
+- a function "add" to append a particle to the event, taking as argument
+  the charge and the 3 momentum components,
+- 4 functions "eventNumber", "x", "y", "z" returning the event number and
+  the 3 decay point coordinates,
+- a function "nParticles" returning the number of particles,
+- a function "particle" taking an int as argument and returning the pointer 
+  to the corresponding particle, if existing, or a null pointer if the
+  particle does not exist (i.e. when the argument is bigger than the number
+  of particles).
+Declare "const" the functions returning event data
+("eventNumber", "x", "y", "z").
+Create and delete the array of pointers to the particles in the constructor
+and destructor, using the maximum number of particles as size; in the
+destructor delete all the particles too, before deleting the array.
+In the function "add" check if the max number of particles has been reached, 
+if not append the new particle and increase the number of particles.
+
+***
+Modify the "read" function, to use the new functions in the "Event" class:
+- pass the event number and the decay point coordinates to the constructor,
+- call the "add" function in the loop reading particles.
+
+***
+Remove the "clear" function.
+
+***
+Modify the "dump" functions to access event data through the "Event" class
+functions.
+
+***
+Create a Utilities class, and move inside this new class the two functions
+computing the energy or the mass from the 3 momentum components and the
+mass or the energy, respectively. Declare those functions as "static". --> anche namespace utilities
+
+***
+Create a Constants class and move inside this new class the masses of
+pion, proton, K0 and Lambda0. Initialize those values properly.
+
+***
+Modify the "mass" function to:
+- access event data through the "Event" class functions,
+- use the functions and values in the "Utilities" and "Constants" classes. 
+
+***
+Create a class "MassMean" with the following private members:
+- two numbers for min and max invariant mass,
+- the number of selected events,
+- two numbers for sum of masses and sum of squares,
+- two numbers for mean and rms.
+Add to the class:
+- a constructor taking the min and max invariant mass as parameters,
+- a destructor,
+- a function "add" taking as argument a reference to const-Event,
+  to update the sum of masses and squares
+- a function "compute" to compute mean and rms,
+- a function "nEvents" returning the number of selected events,
+- two functions "mMean" and "mRMS" returning the mean and rms.
+Initialize all the variables in the costructor.
+In the function "add" compute the invariant mass calling the "mass" function, 
+check if the result is in the required range, if yes increase the event
+counter and the sums, otherwise do nothing.
+Declare "const" the functions returning results (number of selected events,
+mean and rms ).
+If you chose to subtract the min. mass event by event, use the same
+parameter used to select events inside the mass range.
+
+***
+In the "main" function create 2 instances of "MassMean", to select 
+events with invariant mass in the ranges:
+K0      : min = 0.495 , max = 0.500
+Lambda0 : min = 1.115 , max = 1.116
+In the event loop call the function "add" for both instances and replace the 
+call to the "clear" function with a call to the operator "delete"; at the end 
+call the function "compute" and print the results for both instances as well.
+
+********* final list of functions *********
+
+main                   to complete  	--> ok
+read                   modify Mean_v1
+dump                   modify Mean_v1
+mass                   modify Mean_v1
+
+********* final list of classes   *********
+
+                       .h                            .cc
+Event                  to complete                   to complete
+MassMean               to complete                   to complete
+Constants              to do                         to do --> masse delle particelle const
+Utilities              to do                         to do --> funzioni iMass and energy

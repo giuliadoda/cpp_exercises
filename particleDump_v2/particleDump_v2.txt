@@ -1,0 +1,41 @@
+
+---- Modify Dump_v1 and use structs ----
+
+Create a "Particle" struct, with members corresponding to the data
+for each particle (charge, 3 momentum components).
+Create an "Event" struct, with members corresponding to the data
+for each event (event identifier, 3 decay point coordinates,
+number of particles, array of pointers to Particle structs, i.e. Particle**).
+
+***
+Use a dynamic array for the list of pointers to Particle; create
+all the Particle structs dynamically, too.
+
+***
+Create a function "read" taking as argument an input file stream,
+reading an event and returning a pointer to the event or a null pointer 
+at the file end. Create the event dynamically.
+
+***
+Create a function "dump" taking as argument a reference to const-event
+and printing a dump on the screen.
+Write on the screen only the numbers, do not add any text as "Event number:"
+or "these are the particles:"; the output should be usable as input for
+a following run of the program.
+
+***
+Create a function "clear" deleting the event and its content, including
+all the particles: first of all delete all the Particle structs, then
+delete the array of the pointers and at last the Event struct.
+
+***
+Create a "main" function taking the file name from the command string, 
+reading the file and calling the dump and clear functions.
+
+********* final list of functions *********
+
+main                   to do
+struct Event, Particle to do
+read                   to do
+clear                  to do
+dump                   to do

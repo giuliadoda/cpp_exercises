@@ -1,0 +1,44 @@
+
+---- Read the text file "particle_events.txt" ----
+
+The file contains a sequence of events, and for each event:
+- an integer identifier,
+- the 3 decay point coordinates
+- the number of particles,
+- for each particle the electric charge and the 3 momentum components
+The file is written in text format, not binary (different from the Bragg
+example!).
+
+***
+Create a function "read" taking as arguments:
+- the reference to an input file stream,
+- the reference to 3 floats to fill with the decay point coordinates,
+- an array of integers to fill with electric charges,
+- 3 arrays of float to fill with momenta components
+and returning the number of particles.
+
+***
+Create a function "dump" taking as argument:
+- the number of the event, 
+- the number of particles,
+- 3 floats for the decay point coordinates,
+- an array of integers containing electric charges,
+- 3 arrays of float containing momenta components
+and printing a dump on the screen.
+Write on the screen only the numbers, do not add any text as "Event number:"
+or "these are the particles:"; the output should be usable as input for
+a following run of the program.
+
+***
+Create a "main" function taking the file name from the command string, 
+opening the file and calling the read and dump functions.
+Dimension the arrays in the "main", using 10 as max number of particles. 
+For each event try to read the event identifier in the "main", and on 
+success call the "read" function to read the other data and then call 
+the "dump" function.
+
+********* final list of functions *********
+
+main                   to do
+read                   to do
+dump                   to do

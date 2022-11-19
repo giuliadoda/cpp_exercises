@@ -1,0 +1,1 @@
+c++ -Wall -I. -o main *cc
