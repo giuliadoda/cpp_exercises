@@ -1,11 +1,3 @@
-/*
- to increase precision --> subtract the min. invariant mass (i.e. 0.490) 
- from the computed mass event by event, before updating the sums, 
- and add it back to the mean after all the calculations.
-*/
-
-#include <iostream>
-
 #include "Event.h"
 
 double mass(const Event& ev);

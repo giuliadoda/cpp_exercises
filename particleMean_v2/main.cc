@@ -1,12 +1,7 @@
-#include <iostream>
 #include <fstream>
-#include <cmath>
-
+#include <iostream>
 #include "Event.h"
 #include "MassMean.h"
-#include "Utilities.h"
-#include "Constants.h"
-
 
 void dump (const Event& ev);
 Event* read (std::ifstream& file);
@@ -24,9 +19,11 @@ int main( int argc, char* argv[] ) {
   // loop over events
   const Event* ev;
   while ( ( ev = read(file) ) != nullptr) {
-    dump(*ev);
+
+    // dump(*ev);
     K0.add(*ev);
     L0.add(*ev);
+
     delete ev;
   }
 
@@ -41,4 +38,3 @@ int main( int argc, char* argv[] ) {
   return 0;
 
 }
-

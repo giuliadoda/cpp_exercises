@@ -20,8 +20,7 @@ Event* read (std::ifstream& file) {
 
     // number of particles
     int k;
-    file >> k;
-    
+    file >> k;   
 
     // loop over particles
     int j;

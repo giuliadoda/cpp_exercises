@@ -18,14 +18,15 @@ void dump (const Event& ev) {
               << ev.Z() << " ";
 
     // number of particles
-    std::cout << ev.nParticles() << " ";
+    int n = ev.nParticles();
+    std::cout <<  n << " ";
 
     // particles details
-    int j;
-    for ( j = 0; j < ev.nParticles(); ++j) std::cout << ev.particle(j)->charge << " "
-                                                     << ev.particle(j)->px << " "
-                                                     << ev.particle(j)->py << " "
-                                                     << ev.particle(j)->pz << " ";
+    unsigned int j;
+    for ( j = 0; j < n; ++j) std::cout << ev.particle(j)->charge << " "
+                                       << ev.particle(j)->px     << " "
+                                       << ev.particle(j)->py     << " "
+                                       << ev.particle(j)->pz     << " ";
     
     std::cout << std::endl;
 

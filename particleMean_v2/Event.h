@@ -43,9 +43,9 @@ class Event {
 
  private:
 
-  // event-specific informations:
+  // event-specific informations --> initialized trough passing to constructor
   int evNumber; // event id
-  float x;      // decay point
+  float x;      // decay point coordinates 
   float y;
   float z;
 

@@ -3,7 +3,10 @@
 // constructor
 Event::Event( int n, float x, float y, float z ):
  // initializations
- evNumber (n) {
+ evNumber (n),
+ x(x),
+ y(y),
+ z(z) {
   maxP = 10; // max number of particles
   np = 0;
   // allocate a buffer for particle pointers 
@@ -20,7 +23,8 @@ Event::~Event() {
   delete[] Ps;
 }
 
-// add particles to event --> called in read(file) function --> loop over particles
+// add particles to event 
+// --> called in read(file) function --> loop over particles
 void Event::add( int charge, double px, double py, double pz ) {
 
   // check for the number of particles
@@ -29,14 +33,14 @@ void Event::add( int charge, double px, double py, double pz ) {
 
   // create the new particle and fill with data
   // store the new particle pointer in the array and increase counter
-  int i;
-  for ( i = 0; i < np; ++i) {
-    Ps[i] = new Particle;
-    Ps[i]->charge = charge;
-    Ps[i]->px = px;
-    Ps[i]->py = py;
-    Ps[i]->pz = pz;
-  }
+  Ps[np] = new Particle;
+
+  Ps[np]->charge = charge;
+  Ps[np]->px = px;
+  Ps[np]->py = py;
+  Ps[np]->pz = pz;
+
+  ++np;
 
   return;
 
@@ -72,7 +76,7 @@ int Event::nParticles() const {
 // get particle
 const Event::Particle* Event::particle( unsigned int i ) const {
   // restituisce il puntatore alla particella i esima --> se non esiste deve restituire puntatore nullo
-  if (i>maxP) return nullptr;
+  if (i>=maxP) return nullptr;
   else return Ps[i];
 }
 
