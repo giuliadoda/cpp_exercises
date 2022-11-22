@@ -1,11 +1,10 @@
-#include <iostream>
 #include <fstream>
 
 #include "Event.h"
 
-const Event* read (std::ifstream& file);
-void dump (const Event& ev);
-void clear (const Event* ev);
+const Event* read (std::ifstream& file);    // function to read file    
+void dump (const Event& ev);                // functio to dump data on screen
+void clear (const Event* ev);               // function to clear memory
 
 int main (int argc, char* argv[]) {
 
@@ -13,6 +12,8 @@ int main (int argc, char* argv[]) {
     std::ifstream file (name);
 
     const Event* ev;
+
+    // loop over events
     while ( (ev = read(file) ) != nullptr ) {
         dump(*ev);
         clear(ev);

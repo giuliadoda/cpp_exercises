@@ -1,37 +1,13 @@
-#include <iostream>
 #include <fstream>
 
-// the function returns the number of particles producted in decay
+// function that returns the number of particles producted in decay
 
-/* 
-  FILE STRUCTURE
-  int --> event identifier
-  3 floats --> decay point coordinates
-  int --> number of particles producted in the decay
-  for each particles: 
-    int --> electric charge
-    3 floats --> momenta components
-*/
-
-/*
-  FUNCTION ARGUMENTS
-  std::ifstream& file --> is a reference to a input file stream tipe --> the function takes a file as argument
-  float& x_decay --> references to decay point coordinates
-  float& y_decay
-  float& z_decay
-  int* charges --> charges array
-  float* px --> momenta components array
-  float* py
-  float* pz
-*/
-
-
-int read( std::ifstream& file,
-            float& x_decay,
+int read( std::ifstream& file,  // input file
+            float& x_decay,     // decay point coordinates
             float& y_decay,
             float& z_decay,
-            int* charges,
-            float* px,
+            int* charges,       // particles charges
+            float* px,          // momenta components
             float* py,
             float* pz) {
 
@@ -41,6 +17,7 @@ int read( std::ifstream& file,
 
     file >> n; // reading number of particles producted
 
+    // loop opver particles
     int i;
     for (i = 0; i < n; ++i) {
         file >> charges[i];

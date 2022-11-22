@@ -8,7 +8,7 @@ class MassMean {
  public:
 
   // constructor
-  MassMean( double min, double max ); // mass range
+  MassMean( const double min, const double max ); // mass range
 
   // destructor
   ~MassMean();

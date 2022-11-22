@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 #include "Event.h"
 #include "MassMean.h"
 #include "Utilities.h"
@@ -26,9 +25,6 @@ double mass(const Event& ev) {
 
     int k = ev.nParticles();
 
-    // pointer to constants object
-    Constants* c = new Constants;
-
     // loop over particles
     for ( j = 0; j < k; ++j)
     {
@@ -45,28 +41,18 @@ double mass(const Event& ev) {
         spz += pz;
 
         // update energy sums, for K0 and Lambda0 hypotheses 
-        eK0 += Utilities::energy(px, py, pz, c->massPion);
-
-        //std::cout << particle->charge << std::endl;
+        eK0 += Utilities::energy(px, py, pz, Constants::massPion);
 
         // update positive/negative track counters
         // update energy sums
         if (particle->charge > 0) {
             ++ptc;
-            eL0 += Utilities::energy(px, py, pz, c->massProton);
-
-            //std::cout << "stelle" << std::endl;
-
+            eL0 += Utilities::energy(px, py, pz, Constants::massProton);
             }
         else if (particle->charge < 0) {
             ++ntc;
-            eL0 += Utilities::energy(px, py, pz, c->massPion);
-
-            //std::cout << "luna" << std::endl;
-
-        }
-
-        // delete[] particle;
+            eL0 += Utilities::energy(px, py, pz, Constants::massPion);
+            }
     
     }
 
@@ -85,24 +71,18 @@ double mass(const Event& ev) {
 
         // check if iMass returns physical value
         if ( (mfK != -1) && (mfL != -1)) {
-            dK = mfK - c->massK0;
-            dL = mfL - c->massLambda0;
-            delete c;
+            dK = mfK - Constants::massK0;
+            dL = mfL - Constants::massLambda0;
             }
-        else {   
-            delete c;
-            return -1;
-            }
+        else return -1;
 
         // returning invariant mass of the particle
         if ( fabs(dK) < fabs(dL) ) {
           return mfK;
           } 
-        else {
-          return mfL;
-          }
+        else return mfL;
 
-    }
+        }
     else return -1; 
 
 }

@@ -50,10 +50,10 @@ class Event {
   float z;
 
   // particles: number and array of pointers
-  int np; // particle number
-  Particle** Ps; // array of pointers to particle struct
+  int np; 
+  Particle** Ps; 
 
-  int maxP; // maximum number of particles
+  const int maxP = 10; // maximum number of particles
 
 };
 

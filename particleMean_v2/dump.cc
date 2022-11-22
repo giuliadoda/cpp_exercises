@@ -1,10 +1,4 @@
-/*
-Modify the "dump" functions to access event data through the "Event" class
-functions.
-*/
-
 #include <iostream>
-#include <fstream>
 #include "Event.h"
 
 void dump (const Event& ev) {
@@ -21,7 +15,7 @@ void dump (const Event& ev) {
     int n = ev.nParticles();
     std::cout <<  n << " ";
 
-    // particles details
+    // loop for particles details
     unsigned int j;
     for ( j = 0; j < n; ++j) std::cout << ev.particle(j)->charge << " "
                                        << ev.particle(j)->px     << " "

@@ -2,16 +2,19 @@
 
 double mass(const Event& ev);
 
-bool add (const Event& ev, double mMin, double mMax, double& sum,  // sum of invariant masses
-                                                     double& sqr){ // sum of the squares
+
+// function to check if the invariant mass is in the range
+// if true update mass sum adn sum of squares
+
+bool add (const Event& ev, double mMin, double mMax, double& sum, double& sqr) { 
 
     // computing invariant mass of the decay particle
+    // subtracting min to increase precision
     double m = mass(ev) - mMin;
 
-    if ( m > (mMax -mMin) ) return false;
-    else if ( m < 0 ) return false;
+    // check for mass being in range
+    if ( (m < 0) || m > (mMax - mMin) ) return false;
     else {
-        // std::cout << ev.evNumber << "    " << m << std::endl;
         sum += m;
         sqr += m*m;
         return true;

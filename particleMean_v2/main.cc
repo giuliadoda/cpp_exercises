@@ -13,8 +13,14 @@ int main( int argc, char* argv[] ) {
   std::ifstream file (name);
 
   // create MassMean objects (with mass range passed to constructor)
-  MassMean K0(0.495, 0.500);
-  MassMean L0(1.115, 1.116);
+  const double mMinK = 0.495;
+  const double mMaxK = 0.500;
+
+  const double mMinL = 1.115;
+  const double mMaxL = 1.116;
+
+  MassMean K0(mMinK, mMaxK);
+  MassMean L0(mMinL, mMaxL);
 
   // loop over events
   const Event* ev;

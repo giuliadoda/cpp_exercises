@@ -20,7 +20,7 @@ int main (int argc, char* argv[]) {
     double sqr = 0; // sum of squares of invariant masses
 
     double mm;  // mean invariant mass
-    double rms; // rms invariant mass
+    double rms = 0; // rms invariant mass
 
     double mMin = 0.490; // selecting only K0 events
     double mMax = 0.505;
@@ -35,9 +35,8 @@ int main (int argc, char* argv[]) {
 
     // computing mass mean and rms
     mm = sum/aev;
-    rms = sqrt( sqr/aev - pow( mm, 2 ) );
-
-    // std::cout << aev << std::endl;
+    double r = sqr/aev - pow( mm, 2 );
+    if (r > 0) rms = sqrt(r);
 
     std::cout << (mm+mMin) << "   " << rms << std::endl;
 

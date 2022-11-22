@@ -1,51 +1,57 @@
-#include <iostream>
 #include <fstream>
 
+// functions that returns number of particles producted in decay
 int read( std::ifstream& file,
-            float& x_decay,
-            float& y_decay,
-            float& z_decay,
+            float& x,
+            float& y,
+            float& z,
             int* charges,
             float* px,
             float* py,
             float* pz);
 
+// function to print a dump on screen
 void dump( int ev_id,
            int n_particles,
-           float x_decay,
-           float y_decay,
-           float z_decay,
+           float x,
+           float y,
+           float z,
            int* charges,
            float* px,
            float* py,
            float* pz);
 
 
-int main( int a, char* w[] ) {
+int main( int argc, char* argv[] ) {
 
-    const char* name_f = w[1];
+    const char* name = argv[1];
 
-    std::ifstream file ( name_f );
+    std::ifstream file ( name );
+
+    // max number of particles producted in each event
+    const int maxP = 10;
 
     // event variables
     int ev_id;
-    float x_decay, y_decay, z_decay;
+    float x, y, z;
     int n_particles;
-    int charges[10];
-    float px[10];
-    float py[10];
-    float pz[10];
+    int charges[maxP];
+    float px[maxP];
+    float py[maxP];
+    float pz[maxP];
 
+    // loop over events
     while ( file >> ev_id) {
 
+        // number of particles producted in decay
         n_particles = read( file, 
-                            x_decay, y_decay, z_decay, 
+                            x, y, z, 
                             charges, 
                             px, py, pz);
         
         dump( ev_id,
               n_particles,
-              x_decay, y_decay, z_decay,
+              x, y, z,
               charges, 
               px, py, pz);
     }

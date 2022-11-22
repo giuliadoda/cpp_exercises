@@ -1,6 +1,3 @@
-#include <iostream>
-#include <fstream>
-
 #include "Event.h"
 
 void clear (const Event* ev) {

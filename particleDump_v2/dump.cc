@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 
 #include "Event.h"
 
@@ -18,7 +17,7 @@ void dump (const Event& ev){
     // write number of particles
     std::cout << ev.n << " ";
 
-    // write Particle structs content
+    // write Particle structs content (loop over particles)
     int i;
     for (i=0; i<ev.n; ++i) std::cout << ev.Ps[i]->charge << " "
                                      << ev.Ps[i]->px << " "

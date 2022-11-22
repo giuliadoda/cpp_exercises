@@ -32,6 +32,7 @@ a following run of the program.
 ***
 Create a "main" function taking the file name from the command string, 
 opening the file and calling the read and dump functions.
+
 Dimension the arrays in the "main", using 10 as max number of particles. 
 For each event try to read the event identifier in the "main", and on 
 success call the "read" function to read the other data and then call 

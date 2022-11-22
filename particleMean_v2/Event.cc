@@ -7,7 +7,6 @@ Event::Event( int n, float x, float y, float z ):
  x(x),
  y(y),
  z(z) {
-  maxP = 10; // max number of particles
   np = 0;
   // allocate a buffer for particle pointers 
   Ps = new Particle*[maxP]; // array of pointers to Particle struct
@@ -73,10 +72,12 @@ int Event::nParticles() const {
 }
 
 
-// get particle
+// get particle: returning pointer to i-particle (or nullptr)
+// note i>=maxP and not i>maxP because this function is called in a loop where
+// the argument passed begins with i = 0 so we have to go until (maxP-1)
 const Event::Particle* Event::particle( unsigned int i ) const {
-  // restituisce il puntatore alla particella i esima --> se non esiste deve restituire puntatore nullo
   if (i>=maxP) return nullptr;
   else return Ps[i];
 }
+
 

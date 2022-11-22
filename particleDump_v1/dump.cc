@@ -1,27 +1,14 @@
 #include <iostream>
 
-// this function dumps data on screen
+// function that dumps data on screen
 
-/*
-    FUNCTION ARGUMENTS
-    int ev_id --> event number
-    int n_particles --> particle numbers
-    float x_decay --> decay point coordinates
-    float y_decay
-    float z_decay
-    int* charges --> array of integers containing electric charges
-    float* px --> 3 array of float containing momenta components
-    float* py
-    float* pz
-*/
-
-void dump ( int ev_id,
-            int n_particles,
-            float x_decay,
+void dump ( int ev_id,          // event number
+            int n_particles,    // number of particles producted
+            float x_decay,      // decay point coordinates
             float y_decay,
             float z_decay,
-            int* charges,
-            float* px,
+            int* charges,       // particles charges
+            float* px,          // momenta components
             float* py,
             float* pz) {
 
@@ -31,6 +18,7 @@ void dump ( int ev_id,
               << z_decay << ' '
               << n_particles << ' ';
 
+    // loop over particles
     int i;
     for ( i = 0; i < n_particles; ++i)
         std::cout << charges[i] << ' ' 

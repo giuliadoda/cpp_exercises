@@ -3,18 +3,18 @@
 
 struct Particle {
     int charge; // particle charge
-    float px;
+    float px;   // momenta components
     float py;
-    float pz;   // particle momentum
+    float pz;   
 };
 
 struct Event {
     int evNumber;   // event number identifier
-    float x;
+    float x;        // decay point coordinates
     float y; 
-    float z;        // decay point coordinates
+    float z;        
     int n;          // number of particles
-    Particle** Ps;  // array of pointers to Particle structs
+    Particle** Ps;  // array of pointers to Particle struct
 };
 
 

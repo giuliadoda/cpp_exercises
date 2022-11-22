@@ -10,7 +10,7 @@
 double mass( const Event& ev );  
 
 // constructor
-MassMean::MassMean( double min, double max ):
+MassMean::MassMean( const double min, const double max ):
  // initializations
  mMin(min),
  mMax(max) {
@@ -46,8 +46,8 @@ void MassMean::add( const Event& ev ) {
 
 // compute mean and rms
 void MassMean::compute() {
-  mm = sum/(aev*1.);
-  double r = sqr/(aev*1.) - pow( mm, 2 );
+  mm = sum/aev;
+  double r = sqr/aev - pow( mm, 2 );
   if ( r > 0) rms = sqrt( r );
   return;
 }
