@@ -46,9 +46,9 @@ void MassMean::add( const Event& ev ) {
 
 // compute mean and rms
 void MassMean::compute() {
-  mm = sum/aev;
-  double r = sqr/aev - pow( mm, 2 );
-  if ( r > 0) rms = sqrt( r );
+  mm = sum*1./aev;
+  double r = sqr*1./aev - pow( mm, 2 );
+  rms = (r > 0 ? sqrt(r) : 0.0);
   return;
 }
 
