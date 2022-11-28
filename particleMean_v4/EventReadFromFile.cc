@@ -29,25 +29,25 @@ const Event* EventReadFromFile::readFile() {
     int i;
     float x, y, z;
 
-    if ( file->operator>>(i) ) {
-        file->operator>>(x);
-        file->operator>>(y);
-        file->operator>>(z);
+    if ( *file >> i ) {
+        *file >> x;
+        *file >> y;
+        *file >> z;
         ev = new Event(i, x, y, z);
         }
     else return nullptr;
 
     int k;
-    file->operator>>(k);
+    *file >> k;
 
     int j, c;
     double px, py, pz;
     for ( j = 0; j < k; j++) {
-        file->operator>>(c);
+        *file >> c;
 
-        file->operator>>(px);
-        file->operator>>(py);
-        file->operator>>(pz);
+        *file >> px;
+        *file >> py;
+        *file >> pz;
 
         ev->add(c, px, py,pz);
         }

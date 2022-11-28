@@ -6,8 +6,4 @@
 
 ./main sim 2469
 
-(2469 is the number of events we want to simulate, it could be changed)
-
-./main sim seedNumber
-
-(seedNumber gives a casual number of events)
+(2469 is the number of events we want to simulate)
