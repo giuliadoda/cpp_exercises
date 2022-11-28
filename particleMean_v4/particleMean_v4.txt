@@ -1,0 +1,73 @@
+
+---- Modify Mean_v3 and use interfaces for event read and process ----
+
+Replace "read" and "dump" global functions to use classes with 
+abstract interfaces, as described in the following.
+The execution command should be:
+
+execName (main) input fileName
+or
+execName sim numberOfEvents [seedNumber --> numeri casuali]
+
+***
+Take following files from example "braggMean_v4":
+- AnalysisSteering.h ,
+- AnalysisSteering.cc ,
+- EventSource.h ,
+- EventSource.cc ,
+- EventReadFromFile.h ,
+- EventDump.h .
+All these files can be used with no modification
+
+***
+Create the following files copying the corresponding ones from
+"braggMean_v4" and changing the "readFile" and "process" functions,
+respectively:
+- EventReadFromFile.cc ,
+- EventDump.cc .
+In EventReadFromFile.cc include in function "readFile" the code formerly
+in the global function "read",
+In EventDump.cc include in function "process" the code formerly
+in the global function "dump".
+
+***
+Create a class "ParticleMass", inheriting from "AnalysisSteering" and 
+containing a STL array of pointers to "MassMean" objects; use as example
+the class "ElementReco" in "braggMean_v4".
+Include among the private members a "std::vector pList" of pointers
+to MassMean objects (in place of the "bCurve" vector in "ElementReco").
+Implement the functions:
+- "beginJob" to create and store the pointers to 2 "MassMean" objects 
+  for the 2 decay modes, using the same mass ranges as for previous versions
+  (in the same way as "BraggMean" pointers are stored in "bCurve"),
+- in "endJob" loop over the "MassMean" objects and for each one 
+  compute mean and rms masses and print results (in the same way as there's
+  a loop over "BraggMean" objects to compute and print results),
+- in "process" loop over the "MassMean" objects and for each one 
+  call the "add" function (in the same way as each event is added to 
+  all "BraggMean" objects).
+
+***
+Modify the "main" function to use the modified classes using the 
+file "main.cc" from example "braggMean_v4" as reference (change the 
+analyzers: "ParticleMass" in place of "ElementReco").
+To simulate events use the "EventSim" class.
+
+********* final list of functions *********
+
+main                   modify braggMean_v4
+mass                   copy   Mean_v3 --> rimane funzione globale ok
+
+********* final list of classes   *********
+
+                       .h  (interfaccia)             .cc (implementazione)
+Event                  copy   Mean_v3   OK             copy   Mean_v3 OK
+EventReadFromFile      copy   braggMean_v4 OK          to do --> prendere il codice della funzione read in v3 ok
+EventSim               done                          done
+AnalysisSteering       copy   braggMean_v4 OK          copy   braggMean_v4  OK
+EventSource            copy   braggMean_v4  OK       copy   braggMean_v4  OK
+MassMean               copy   Mean_v3     ok           copy   Mean_v3 ok
+ParticleMass           to do               ok          to do --> invece che ElementReco di Bragg  ok
+EventDump              copy   braggMean_v4    ok       to do  ok
+Constants              copy   Mean_v3     ok           copy   Mean_v3 ok
+Utilities              copy   Mean_v3      ok          copy   Mean_v3 ok
