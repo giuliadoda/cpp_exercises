@@ -26,8 +26,8 @@ void ParticleMass::beginJob() {
     const double mMinL = 1.115;
     const double mMaxL = 1.116;
 
-    const string k = "K mean";
-    const string l = "L mean";
+    const string k = "kMean";
+    const string l = "lMean";
 
     pCreate(k, mMinK, mMaxK);
     pCreate(l, mMinL, mMaxL);
@@ -47,11 +47,11 @@ void ParticleMass::endJob() {
         cout << m->mptr->nEvent() << " " << m->mptr->mMean() << " " << m->mptr->mRMS() << endl;
 
         // create name for file 
-        const char* fName = (m->pName).c_str();
+        //const char* fName = (m->pName).c_str();
 
         // save histogram to file 
         TDirectory* currentDir = gDirectory;
-        TFile* file = new TFile(fName, "NEW");
+        TFile* file = new TFile("partist.root", "UPDATE");
         m->h->Write();
         delete file;
         currentDir->cd();
@@ -87,13 +87,13 @@ void ParticleMass::pCreate(const string& name, const double min, const double ma
     const char* hName = name.c_str();
 
     // bin number --> check
-    int nBin = 10;
+    int nBin = 150;
 
     // create TH1F
     Particle* pp = new Particle;
     pp->pName = name;
     pp->mptr = new MassMean(min, max);
-    pp->h = new TH1F(hName, hName, nBin, 0.5, nBin + 0.5);
+    pp->h = new TH1F(hName, hName, nBin, min, max);
     pList.push_back(pp);
 
     return;
