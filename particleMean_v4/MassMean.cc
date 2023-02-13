@@ -41,9 +41,6 @@ void MassMean::add( const Event& ev ) {
   
 }
 
-// please note: nothing changes if I don't use precision update
-
-
 // compute mean and rms
 void MassMean::compute() {
   mm = sum*1./aev;
@@ -68,4 +65,3 @@ double MassMean::mMean() const {
 double MassMean::mRMS() const {
   return rms;
 }
-

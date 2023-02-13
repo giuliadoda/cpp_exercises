@@ -39,3 +39,8 @@ struct Event, Particle to do
 read                   to do
 clear                  to do
 dump                   to do
+
+
+****** to execute *******
+
+./main FileName

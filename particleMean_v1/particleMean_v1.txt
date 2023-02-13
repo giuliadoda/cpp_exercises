@@ -42,7 +42,9 @@ Use the following variables:
 Use a typedef to declare pointers to const-Particle structs.
 
 Loop over the particles, and for each one:
+
 - increase the corresponding counter, according to charge,
+
 - increase the 3 momentum components sum (remember to inizialize them as zero),
 
 - compute particle energy for the hypothesis of a decaying K0, 
@@ -107,3 +109,7 @@ dump                   copy   Dump_v2 --> ok
 mass                   to complete    --> ok
 add                    to do	      --> ok
 
+
+****** to execute *******
+
+./main FileName

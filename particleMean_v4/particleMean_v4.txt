@@ -7,7 +7,7 @@ The execution command should be:
 
 execName (main) input fileName
 or
-execName sim numberOfEvents [seedNumber --> numeri casuali]
+execName sim numberOfEvents 
 
 ***
 Take following files from example "braggMean_v4":
@@ -60,14 +60,22 @@ mass                   copy   Mean_v3 --> rimane funzione globale ok
 
 ********* final list of classes   *********
 
-                       .h  (interfaccia)             .cc (implementazione)
+                       .h                              .cc 
 Event                  copy   Mean_v3   OK             copy   Mean_v3 OK
-EventReadFromFile      copy   braggMean_v4 OK          to do --> prendere il codice della funzione read in v3 ok
-EventSim               done                          done
+EventReadFromFile      copy   braggMean_v4 OK          to do  ok
+EventSim               done                            done
 AnalysisSteering       copy   braggMean_v4 OK          copy   braggMean_v4  OK
-EventSource            copy   braggMean_v4  OK       copy   braggMean_v4  OK
+EventSource            copy   braggMean_v4  OK         copy   braggMean_v4  OK
 MassMean               copy   Mean_v3     ok           copy   Mean_v3 ok
-ParticleMass           to do               ok          to do --> invece che ElementReco di Bragg  ok
+ParticleMass           to do               ok          to do  ok
 EventDump              copy   braggMean_v4    ok       to do  ok
 Constants              copy   Mean_v3     ok           copy   Mean_v3 ok
 Utilities              copy   Mean_v3      ok          copy   Mean_v3 ok
+
+***** to execute *****
+
+The execution command should be:
+
+execName  input  fileName
+or
+execName  sim    numberOfEvents 

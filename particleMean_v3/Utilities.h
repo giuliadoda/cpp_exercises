@@ -5,7 +5,10 @@ class Utilities {
 
     public:
 
+    // constructor
     Utilities();
+
+    // deconstructor
     ~Utilities();
 
     // function to compute energy from momentum components and invariant mass 

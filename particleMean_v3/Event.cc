@@ -12,7 +12,6 @@ Event::Event( int n, float x, float y, float z ):
   Ps.reserve(10);
 }
 
-
 // destructor
 Event::~Event() {
   Ps.clear();
@@ -41,12 +40,10 @@ void Event::add( int charge, double px, double py, double pz ) {
 
 }
 
-
 // get event id.
 int Event::eventNumber() const {
   return evNumber;
 }
-
 
 // get decay point coordinates
 float Event::X() const {
@@ -61,12 +58,10 @@ float Event::Z() const {
   return z;
 }
 
-
 // get number of particles
 int Event::nParticles() const {
   return Ps.size();
 }
-
 
 // get particle: returning struct to i-particle (or nullptr)
 // note i>=maxP and not i>maxP because this function is called in a loop where
@@ -75,5 +70,3 @@ const Event::Particle* Event::particle( unsigned int i ) const {
   if (i >= 10) return nullptr;
   else return &Ps[i];
 }
-
-

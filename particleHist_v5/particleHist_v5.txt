@@ -1,0 +1,109 @@
+
+---- Modify Hist_v4 and use dispatcher&observers to handle begin/end job ----
+
+**** Part A ****
+
+***
+Use the "Utilities" package already downloaded in version 4
+
+***
+In "AnalysisSteering.h" remove the "process" function declaration.
+
+***
+Take the following from braggPlot_v5 (and look at the differences with 
+the v4 version):
+- the new version of "AnalysisInfo.h",
+- the new version of "AnalysisSteering.h,cc",
+- the new version of "main.cc".
+
+***
+In the "main" program handle begin/end job by dispatching
+"AnalysisInfo::begin" or "AnalysisInfo::end" enums.
+
+**** Part B ****
+
+***
+In "ParticleMass.cc":
+- read the mass ranges from a text file ("massRanges") taking 
+  the name from the command line through "AnalysisInfo" and allowing for
+  different numbers of ranges
+
+*** Include lifetim max. likelihood fit ***
+
+In "LifetimeFit.h":
+- add the following private members:
+  * min and max time range (2 doubles),
+  * min and max scan range (2 doubles),
+  * scan step (1 double),
+  * a container for all the decay times (1 std::vector<double>),
+  * particle mean lifetime and error (2 doubles),
+- remove the number of accepted events,
+- add 5 parameters to the constructors for min. and max. time,
+  min. and max. scan, scan step,
+- add 2 functions "lifeTime" and "lifeTimeError" to return the mean lifetime
+  and error.
+
+In "LifetimeFit.cc":
+- in the "add" function get the decay time from "ProperTime" and,
+  if it's inside the [min,max] range, save it in the std::vector of all the
+  decay times,
+- in the functions "lifeTime" and "lifeTimeError" return the mean lifetime
+  and error (their value is to be set in the "compute" function)
+- in the "nEvents" function return the number of entries in the
+  std::vector of all the decay times,
+- in the "compute" function perform a max. likelihood fit to the lifetime,
+  as described in the following.
+
+The mean lifetime is estimated as the value "t" that minimizes the function: --> likelihood scan (il passo è in particleFilters)
+L(t) = S_i=1^N ( (t_i/t) + log(t) + log( exp(-t_min/t) - exp(-t_max/t) ) ) --> probabilità di avere gli eventi se la vita media è t
+where t_min and t_max are the min. and max. decay times accepted in the
+analysis.
+
+The minimum can be found performing a scan for "t" in the range [s_min,s_max],
+fitting the L(t) function with a parabola L=a+bt+ct^2 and getting the
+minimum as t=-b/2c . The error correspond to the range where L(t) is smaller
+than Lmin+0.5 and can be computed as S(t)=1/sqrt(2c) .
+The scan and fit can be performed using the "QuadraticFitter" class,
+provided in the package.
+
+So, in the "compute" function, do the following:
+- instantiate a QuadraticFitter object,
+- do a scan for t_s in [s_min,s_max] with steps t_step,
+- for each value of t_s compute L(t_s), that implies a nested loop 
+  over all the elements of the std::vector of all the decay times,
+- call the "add" function giving as parameters t_s and L(t_s)
+Then get mean lifetime and error using the formula given above, 
+getting a, b and c from the functions "a", "b" and "c" of "QuadraticFitter".
+ 
+***
+In "ParticleLifetime.h,cc"
+- get the mass and time ranges plus the fit parameters from text file 
+  ("particleFitters"), and change the parameters of the "pCreate" function
+  to handle the increased number of parameters needed by the LifetimeFit 
+  constructor.
+
+********* final list of functions *********
+
+main                   modify Hist_v4 or copy braggPlot_v5
+
+********* final list of classes   *********
+
+                       .h                            .cc
+AnalysisInfo           copy   braggPlot_v5           copy   Hist_v4
+AnalysisSteering       copy   braggPlot_v5           copy   braggPlot_v5
+AnalysisFactory        copy   Hist_v4                copy   Hist_v4
+SourceFactory          copy   Hist_v4                copy   Hist_v4
+Event                  copy   Hist_v4                copy   Hist_v4
+EventSource            copy   Hist_v4                copy   Hist_v4
+EventReadFromFile      copy   Hist_v4                copy   Hist_v4
+EventSim               copy   Hist_v4                copy   Hist_v4
+EventDump              copy   Hist_v4                copy   Hist_v4
+ParticleMass           copy   Hist_v4                modify Hist_v4
+MassMean               copy   Hist_v4                copy   Hist_v4
+Constants              copy   Hist_v4                copy   Hist_v4
+Utilities              copy   Hist_v4                copy   Hist_v4
+ParticleReco           copy   Hist_v4                copy   Hist_v4
+ProperTime             copy   Hist_v4                copy   Hist_v4
+LifetimeFit            modify Hist_v4                modify Hist_v4
+ParticleLifetime       modify Hist_v4                modify Hist_v4
+QuadraticFitter        done                          done

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-c++ -Wall -std=c++11 -o main *.cc
+rm -f main
+c++ -Wall -std=c++11 -I. -o main *.cc

@@ -42,8 +42,6 @@ class Event {
   const Particle* particle( unsigned int i ) const; // returning the pointer to the 
                                                           // corresponding particle (otherwise nullptr)
 
-
-
  private:
 
   // event-specific informations --> initialized trough passing to constructor
@@ -58,4 +56,3 @@ class Event {
 };
 
 #endif
-

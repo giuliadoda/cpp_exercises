@@ -4,7 +4,7 @@ double mass(const Event& ev);
 
 
 // function to check if the invariant mass is in the range
-// if true update mass sum adn sum of squares
+// if true update mass sum and sum of squares
 
 bool add (const Event& ev, double mMin, double mMax, double& sum, double& sqr) { 
 

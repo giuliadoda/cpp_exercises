@@ -35,4 +35,3 @@ class MassMean {
 };
 
 #endif
-

@@ -56,4 +56,6 @@ int main( int argc, char* argv[] ) {
               px, py, pz);
     }
 
+    return 0;
+
 }

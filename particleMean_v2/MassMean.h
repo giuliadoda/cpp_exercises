@@ -25,14 +25,13 @@ class MassMean {
   double mMin; // min mass 
   double mMax; // max mass
 
-  int aev; // number of accepted events
+  int aev;    // number of accepted events
   double sum; // sum of masses
   double sqr; // sum of masses square
 
-  double mm; // mean mass
+  double mm;  // mean mass
   double rms; // rms  mass
 
 };
 
 #endif
-

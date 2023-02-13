@@ -7,4 +7,3 @@ EventSource::EventSource() {
 
 EventSource::~EventSource() {
 }
-

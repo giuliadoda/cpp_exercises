@@ -26,4 +26,3 @@ class EventDump: public AnalysisSteering {
 };
 
 #endif
-

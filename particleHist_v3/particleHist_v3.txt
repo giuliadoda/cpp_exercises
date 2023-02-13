@@ -1,0 +1,42 @@
+
+---- Modify Hist_v2 and use a factory to create data analyzers ----
+
+***
+Take the following from "braggPlot_v3":
+- the new versions of "AnalysisSteering.h,cc"
+  (and look at the differences with the v2 version),
+- "AnalysisFactory.h,cc".
+
+***
+Modify "EventDump.h,cc" and "ParticleMass.h,cc" taking "braggPlot_v3" as 
+reference:
+- add an "AnalysisInfo*" as parameter to the constructor, and use it to 
+  initialize the "AnalysisSteering" base,
+- add a concrete Factory class and object, as in braggPlot_v3,
+- get from the "AnalysisInfo" object the name of the output ROOT file
+  (only for "ParticleMass.cc")
+
+***
+Modify the "main" function to use "AnalysisFactory".
+
+********* final list of functions *********
+
+main                   modify Hist_v2 or copy braggPlot_v3
+mass                   copy   Hist_v2
+
+********* final list of classes   *********
+
+                       .h                            .cc
+AnalysisFactory        copy   braggPlot_v3           copy   braggPlot_v3
+AnalysisSteering       copy   braggPlot_v3           copy   braggPlot_v3
+AnalysisInfo           copy   Hist_v2                copy   Hist_v2
+SourceFactory          copy   Hist_v2                copy   Hist_v2
+Event                  copy   Hist_v2                copy   Hist_v2
+EventSource            copy   Hist_v2                copy   Hist_v2
+EventReadFromFile      copy   Hist_v2                copy   Hist_v2
+EventSim               copy   Hist_v2                copy   Hist_v2
+EventDump              modify Hist_v2                modify Hist_v2
+ParticleMass           modify Hist_v2                modify Hist_v2
+MassMean               copy   Hist_v2                copy   Hist_v2
+Constants              copy   Hist_v2                copy   Hist_v2
+Utilities              copy   Hist_v2                copy   Hist_v2

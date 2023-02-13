@@ -15,11 +15,11 @@ int main (int argc, char* argv[]) {
     const char* name = argv[1];
     std::ifstream file (name);
 
-    int aev = 0; // accepted events
+    int aev = 0;    // accepted events
     double sum = 0; // sum of invariant masses
     double sqr = 0; // sum of squares of invariant masses
 
-    double mm;  // mean invariant mass
+    double mm;      // mean invariant mass
     double rms = 0; // rms invariant mass
 
     double mMin = 0.490; // selecting only K0 events
@@ -43,4 +43,3 @@ int main (int argc, char* argv[]) {
     return 0;
 
 }
-

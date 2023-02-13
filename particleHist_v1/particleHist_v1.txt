@@ -46,8 +46,8 @@ EventReadFromFile      copy   Mean_v4    ok            copy   Mean_v4 ok
 EventSim               copy   Mean_v4    ok            copy   Mean_v4 ok
 AnalysisSteering       copy   Mean_v4    ok            copy   Mean_v4 ok
 EventSource            copy   Mean_v4    ok            copy   Mean_v4 ok
-MassMean               modify Mean_v4                modify Mean_v4
-ParticleMass           modify Mean_v4                modify Mean_v4
+MassMean               modify Mean_v4                  modify Mean_v4
+ParticleMass           modify Mean_v4                  modify Mean_v4
 EventDump              copy   Mean_v4    ok            copy   Mean_v4 ok
 Constants              copy   Mean_v4    ok            copy   Mean_v4 ok
 Utilities              copy   Mean_v4    ok            copy   Mean_v4 ok

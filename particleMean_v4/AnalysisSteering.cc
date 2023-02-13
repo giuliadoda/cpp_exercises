@@ -6,4 +6,3 @@ AnalysisSteering::AnalysisSteering() {
 
 AnalysisSteering::~AnalysisSteering() {
 }
-

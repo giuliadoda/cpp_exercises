@@ -1,9 +1,0 @@
-****** input data file ******
-
-./main input ../particle_events.txt
-
-****** simulation ******
-
-./main sim 2469
-
-(2469 is the number of events we want to simulate)

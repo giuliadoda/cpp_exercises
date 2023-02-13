@@ -43,3 +43,8 @@ the "dump" function.
 main                   to do
 read                   to do
 dump                   to do
+
+
+****** to execute *******
+
+./main FileName

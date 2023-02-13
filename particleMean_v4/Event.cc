@@ -75,5 +75,3 @@ const Event::Particle* Event::particle( unsigned int i ) const {
   if (i >= 10) return nullptr;
   else return &Ps[i];
 }
-
-

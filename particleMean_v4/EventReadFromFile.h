@@ -34,4 +34,3 @@ class EventReadFromFile: public EventSource {
 };
 
 #endif
-

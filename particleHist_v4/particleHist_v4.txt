@@ -1,0 +1,147 @@
+
+---- Modify Hist_v3 and use dispatcher&observers to loop over events ----
+
+
+**** Part A ****
+
+***
+Download the "Utilities" package and install it somewhere, then 
+add the corresponding path in the compilation:
+cd ..../corsocxx
+tar -xzf util.tgz
+c++ -I ..../corsocxx
+
+***
+In "AnalysisSteering.h" remove the "process" function declaration.
+
+***
+In "EventDump.h,cc" and "ParticleMass.h,cc":
+- include the Observer header:
+#include "util/include/ActiveObserver.h"
+- inherit from "ActiveObserver<Event>" in addition to the existing base,
+- rename the function "process" as "update".
+
+***
+In "EventSource.h,cc":
+- declare the "get" function as "private",
+- declare and implement a "public" function "run",
+- move the event loop from the "main" function to the new "run" function,
+  and use "Dispatcher<Event>::notify" in the event loop.
+
+***
+Create a class "ParticleReco" to compute total energy and invariant mass:
+- declare it to inherit from the template "Singleton" in the util directory,
+- declare it to inherit from "LazyObserver",
+- declare 3 private member variables for the decay properties
+    decay type (an enum),
+    total energy,
+    invariant mass,
+- compute those variables in the "update" function, using the code formerly
+  in the "mass" global function,
+- declare and implement functions to check for new events and return the
+  decay properties.
+
+***
+In "MassMean.cc" and "ParticleMass.cc" get the invariant mass from
+"ParticleReco" by getting the instance of it and calling the function
+returning the invariant mass.
+
+***
+In "ParticleMass.cc" name the histogram as "mass" followed by the name
+given as first parameter in the "pCreate" function.
+
+***
+Modify the "main" function and replace the event loop with a call to 
+the "run" function in the "EventSource".
+
+
+
+
+**** Part B ****
+
+***
+Add a new quantity "lightVelocity" in Constants.h,cc and set it at
+0.029979246 cm/ps
+
+***
+Duplicate the following classes:
+ParticleReco -> ProperTime
+MassMean     -> LifetimeFit
+ParticleMass -> ParticleLifetime
+This can be done quite easily using the command
+..../util/class/cloneClass XXX YYY
+where XXX is the existing class (e.g. ParticleReco)
+and   YYY is the new      class (e.g. ProperTime)
+
+***
+In "ProperTime.h" declare a member variable "time" and a function "decayTime"
+returning it after checking for new event.
+In "ProperTime.cc" in the "update" function compute the decay proper time
+from the distance "d" of the decay point from the origin using the formula:
+t = d*m/(p*c) --> è ragionevole mettere il valore vero della massa della particella se vogliamo
+where "m" is the invariant mass, "c" the light velocity and "p" the momentum,
+given in turn by
+p = sqrt(e^2-m^2) --> bisogna mettere il valore calcolato della massa della particella (altrimenti gli errori non vanno bene)
+where "e" is the total energy; get the invariant mass and the total energy
+from "ParticleReco".
+
+***
+In "LifetimeFit.h" declare the same member variables and functions as in
+"MassMean", but remove the member variables to hold sums, mean and rms
+and the functions returning them; leave the member variables to hold
+min. and max. mass and number of events plus the function returning this
+last number.
+In "LifetimeFit.cc" in the "add" function simply check if the invariant mass
+is inside the range and update the number of accepted events accordingly;
+the function "compute" can be left empty.
+
+***
+In "ParticleLifetime.h" replace the pointer to "MassMean" with a pointer
+to "LifetimeFit" in the "Particle" struct and add two more parameters
+"timeMin" and "timeMax" to the "pCreate" function, for min. and max.
+decay proper time.
+In "ParticleLifetime.cc" in the "beginJob" function call "pCreate" with
+the same arguments as in "ParticleMass", plus the min. and max. time
+(use 10.0-500.0 and 10.0-1000.0 as ranges); in the "endJob" function
+leave the same operations as in "ParticleMass" but the writing of mean
+and rms (leave the call to the "compute" function, that does not anything
+for now, it will be implemented in the next version); get from the 
+"AnalysisInfo" object the name of the output ROOT file.
+In the "pCreate" function name the histogram as "time" followed by the name
+given as first parameter in the "pCreate" function and use the min. and max.
+decay times as range.
+In the "update" function call the "add" function of the "LifetimeFit" object,
+and fill the histogram according to the result (use the same logic as in
+"ParticleMass").
+
+**** optional ****
+
+Save the mass and decay time histograms on the same ROOT file; use a
+TFileProxy (in the "util" package, include directory) to handle multiple access to the
+same ROOT files in the same run.
+
+********* final list of functions *********
+
+main                   modify Hist_v3 or copy braggPlot_v4
+
+********* final list of classes   *********
+
+                       .h                            .cc
+AnalysisFactory        copy   Hist_v3                copy   Hist_v3
+AnalysisSteering       modify Hist_v3                copy   Hist_v3
+AnalysisInfo           copy   Hist_v3                copy   Hist_v3
+SourceFactory          copy   Hist_v3                copy   Hist_v3
+Event                  copy   Hist_v3                copy   Hist_v3
+EventSource            modify Hist_v3                modify Hist_v3
+EventReadFromFile      copy   Hist_v3                copy   Hist_v3
+EventSim               copy   Hist_v3                copy   Hist_v3
+EventDump              modify Hist_v3                modify Hist_v3
+ParticleMass           modify Hist_v3                modify Hist_v3
+MassMean               copy   Hist_v3                modify Hist_v3
+Constants              modify Hist_v3                modify Hist_v3
+Utilities              copy   Hist_v3                copy   Hist_v3
+ParticleReco           to complete                   to complete
+ProperTime             to do                         to do
+LifetimeFit            to do                         to do
+ParticleLifetime       to do                         to do
+

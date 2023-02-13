@@ -24,7 +24,7 @@ int main( int argc, char* argv[] ) {
 
   // loop over events
   const Event* ev;
-  while ( ( ev = read(file) ) != nullptr) {
+  while ( ( ev = read(file) ) != nullptr ) {
 
     // dump(*ev);
     K0.add(*ev);

@@ -1,0 +1,64 @@
+
+---- Modify Hist_v5 and organize source files in packages ----
+
+***
+Create 4 directories
+- AnalysisFramework
+- AnalysisUtilities
+- AnalysisObjects
+- AnalysisPlugins
+
+***
+Move all the source files to those directories:
+- to AnalysisFramework:
+  main.cc
+  AnalysisInfo.h,cc
+  Event.h,cc
+  EventSource.h,cc
+  EventReadFromFile.h,cc
+  EventSim.h,cc
+  SourceFactory.h,cc
+  AnalysisSteering.h,cc
+  AnalysisFactory.h,cc
+- to AnalysisUtilities:
+  Constants.h,cc
+  Utilities.h,cc
+  QuadraticFitter.h,cc
+- to AnalysisObjects:
+  ParticleReco.h,cc
+  ProperTime.h,cc
+  MassMean.h,cc
+  LifetimeFit.h,cc
+- to AnalysisPlugins:
+  EventDump.h,cc
+  ParticleMass.h,cc
+  ParticleLifetime.h,cc
+
+***
+Update the paths in all the #include instructions
+
+***
+Compile the code in AnalysisFramework, AnalysisUtilities, AnalysisObjects
+and produce a dynamic library for each package.
+Modify the "braggPlot_v6/compile" script changing the names where needed.
+
+***
+Compile the code in AnalysisPlugins and produce a dynamic library for 
+each class.
+
+***
+Create a dummy source file and compile it linking the libraries, 
+to produce different executables (as in braggPlot_v6)
+
+***
+Remember to set the environment variable LD_LIBRARY_PATH with the path where
+the libraries are stored: for ROOT that's done with the script
+source ...../root..../bin/thisroot.[sh,csh]
+for the libraries produced fron this code, use the command
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}":."
+or
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}":."
+according to your command shell, sh or csh ; you can discover with the command
+echo $0
+anyway you can try both export... and setenv... and only one will work and the
+other one will give an error message but will not be harmful
