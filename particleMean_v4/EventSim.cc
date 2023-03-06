@@ -194,8 +194,8 @@ const Event* EventSim::genDecay( int id,
     pDaug1 = &pNeg;
     pDaug2 = &pPos;
   }
-  ev->add(  charge, pDaug1->x(), pDaug1->y(), pDaug1->z() );
-  ev->add( -charge, pDaug2->x(), pDaug2->y(), pDaug2->z() );
+  ev->pAdd(  charge, pDaug1->x(), pDaug1->y(), pDaug1->z() );
+  ev->pAdd( -charge, pDaug2->x(), pDaug2->y(), pDaug2->z() );
 
   // add background
 //  int n = 0.2 * ceil( randE() );
@@ -216,7 +216,7 @@ void EventSim::addBG( Event* ev ) {
                           rmsEnergyBG,
                           minEnergyBG );
   int charge = randC();
-  ev->add( charge,
+  ev->pAdd( charge,
            energy * sinPart * cos( phiPart ),
            energy * sinPart * sin( phiPart ),
            energy * cosPart );

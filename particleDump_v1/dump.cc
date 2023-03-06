@@ -2,15 +2,15 @@
 
 // function that dumps data on screen
 
-void dump ( int ev_id,          // event number
-            int n_particles,    // number of particles producted
-            float x_decay,      // decay point coordinates
-            float y_decay,
-            float z_decay,
-            int* charges,       // particles charges
-            float* px,          // momenta components
-            float* py,
-            float* pz) {
+void dump( int ev_id,          // event number
+           int n_particles,    // number of particles producted
+           float x_decay,      // decay point coordinates
+           float y_decay,
+           float z_decay,
+           int* charges,       // particles charges
+           float* px,          // momenta components
+           float* py,
+           float* pz ) {
 
     std::cout << ev_id << ' ' 
               << x_decay << ' '
@@ -19,8 +19,8 @@ void dump ( int ev_id,          // event number
               << n_particles << ' ';
 
     // loop over particles
-    int i;
-    for ( i = 0; i < n_particles; ++i)
+    unsigned int i;
+    for ( i = 0; i < n_particles; ++i )
         std::cout << charges[i] << ' ' 
                   << px[i] << ' ' 
                   << py[i] << ' ' 
@@ -30,4 +30,4 @@ void dump ( int ev_id,          // event number
 
     return;
 
-}
+    }

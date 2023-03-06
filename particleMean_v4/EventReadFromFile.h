@@ -31,6 +31,6 @@ class EventReadFromFile: public EventSource {
   // read and event
   const Event* readFile();
 
-};
+  };
 
 #endif

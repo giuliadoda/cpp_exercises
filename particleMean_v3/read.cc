@@ -2,7 +2,8 @@
 
 #include "Event.h"
 
-Event* read (std::ifstream& file) {
+
+const Event* read( std::ifstream& file ) {
 
     // event pointer and identifier
     Event* ev;
@@ -22,14 +23,14 @@ Event* read (std::ifstream& file) {
     file >> k;   
 
     // loop over particles
-    int j;
+    unsigned int j;
     int c;
     double px, py, pz;
-    for ( j = 0; j < k; ++j) {
+    for ( j = 0; j < k; ++j ) {
         file >> c >> px >> py >> pz;
-        ev->add(c, px, py, pz); // filling particle object with data
+        ev->pAdd(c, px, py, pz); // filling particle object with data
     }
 
     return ev;
     
-}
+    }

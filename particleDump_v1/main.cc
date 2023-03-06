@@ -1,5 +1,6 @@
 #include <fstream>
 
+
 // functions that returns number of particles producted in decay
 int read( std::ifstream& file,
             float& x,
@@ -8,7 +9,7 @@ int read( std::ifstream& file,
             int* charges,
             float* px,
             float* py,
-            float* pz);
+            float* pz );
 
 // function to print a dump on screen
 void dump( int ev_id,
@@ -19,14 +20,15 @@ void dump( int ev_id,
            int* charges,
            float* px,
            float* py,
-           float* pz);
+           float* pz );
 
 
 int main( int argc, char* argv[] ) {
 
+    // first word [0] is executable file name, the second [1] is input file name
     const char* name = argv[1];
 
-    std::ifstream file ( name );
+    std::ifstream file( name );
 
     // max number of particles producted in each event
     const int maxP = 10;
@@ -41,21 +43,21 @@ int main( int argc, char* argv[] ) {
     float pz[maxP];
 
     // loop over events
-    while ( file >> ev_id) {
+    while ( file >> ev_id ) {
 
         // number of particles producted in decay
         n_particles = read( file, 
                             x, y, z, 
                             charges, 
-                            px, py, pz);
+                            px, py, pz );
         
         dump( ev_id,
               n_particles,
               x, y, z,
               charges, 
-              px, py, pz);
-    }
+              px, py, pz );
+        }
 
     return 0;
 
-}
+    }

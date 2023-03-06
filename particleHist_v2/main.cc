@@ -1,8 +1,3 @@
-#include <vector>
-#include <string>
-#include <sstream>
-#include <iostream>
-
 #include "Event.h"
 #include "AnalysisInfo.h"
 #include "EventSource.h"
@@ -10,6 +5,12 @@
 #include "AnalysisSteering.h"
 #include "EventDump.h"
 #include "ParticleMass.h"
+
+
+#include <vector>
+#include <string>
+#include <sstream>
+
 
 using namespace std;
 

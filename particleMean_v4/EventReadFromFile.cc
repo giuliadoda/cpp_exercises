@@ -11,16 +11,16 @@ using namespace std;
 
 EventReadFromFile::EventReadFromFile ( const string& name ) {
     file = new ifstream(name);
-}
+    }
 
 EventReadFromFile::~EventReadFromFile() {
   delete file;
-}
+    }
 
 // get an event
 const Event* EventReadFromFile::get() {
     return readFile();
-}
+    }
 
 //read an event
 const Event* EventReadFromFile::readFile() {
@@ -49,7 +49,7 @@ const Event* EventReadFromFile::readFile() {
         *file >> py;
         *file >> pz;
 
-        ev->add(c, px, py,pz);
+        ev->pAdd(c, px, py, pz);
         }
     
     return ev;

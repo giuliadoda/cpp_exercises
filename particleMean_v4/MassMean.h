@@ -6,14 +6,11 @@ class Event;
 class MassMean {
 
  public:
-
-  // constructor
+ 
   MassMean( const double min, const double max ); // mass range
-
-  // destructor
   ~MassMean();
 
-  void add( const Event& ev );      // add data from a new event
+  void add( const Event& ev );      // add data from new event
   void compute();                   // compute mean and rms
 
   int nEvent() const;           // return number of accepted events
@@ -32,6 +29,6 @@ class MassMean {
   double mm;  // mean mass
   double rms; // rms  mass
 
-};
+  };
 
 #endif

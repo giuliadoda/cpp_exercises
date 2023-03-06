@@ -21,6 +21,6 @@ class AnalysisSteering {
   // function to be called for each event
   virtual void process( const Event& ev ) = 0;
 
-};
+  };
 
 #endif

@@ -9,14 +9,11 @@ class MassMean {
 
  public:
 
-  // constructor
   MassMean( const double min, const double max ); // mass range
-
-  // destructor
   ~MassMean();
   
 
-  bool add( const Event& ev );      // add data from a new event
+  bool add( const Event& ev );      // true if event mass is in range and update sums
   void compute();                   // compute mean and rms
 
   int nEvent() const;           // return number of accepted events
@@ -35,7 +32,6 @@ class MassMean {
   double mm; // mean mass
   double rms; // rms  mass
 
-};
+  };
 
 #endif
-

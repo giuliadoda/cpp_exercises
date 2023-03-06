@@ -1,13 +1,14 @@
-#include <cmath>
 #include "Event.h"
-#include "MassMean.h"
 #include "Utilities.h"
 #include "Constants.h"
 
-double mass(const Event& ev) {
+#include <cmath>
+
+
+double mass( const Event& ev ) {
 
     // variables to loop over particles
-    int j;
+    unsigned int j;
     double px, py, pz;
 
     // variables for momentum sums
@@ -26,8 +27,8 @@ double mass(const Event& ev) {
     int k = ev.nParticles();
 
     // loop over particles
-    for ( j = 0; j < k; ++j)
-    {
+    for ( j = 0; j < k; ++j ) {
+
         // pointer to j-particle
         const Event::Particle* particle = ev.particle(j);
 
@@ -54,7 +55,7 @@ double mass(const Event& ev) {
             eL0 += Utilities::energy(px, py, pz, Constants::massPion);
             }
     
-    }
+        }
 
     // check for exactly one positive and one negative track
     // otherwise return negative (unphysical) invariant mass
@@ -83,6 +84,7 @@ double mass(const Event& ev) {
         else return mfL;
 
         }
+        
     else return -1; 
 
-}
+    }

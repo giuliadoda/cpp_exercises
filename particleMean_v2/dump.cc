@@ -1,7 +1,9 @@
 #include <iostream>
+
 #include "Event.h"
 
-void dump (const Event& ev) {
+
+void dump( const Event& ev ) {
 
     // write event ID
     std::cout << ev.eventNumber() << " ";
@@ -17,11 +19,11 @@ void dump (const Event& ev) {
 
     // loop for particles details
     unsigned int j;
-    for ( j = 0; j < n; ++j) std::cout << ev.particle(j)->charge << " "
-                                       << ev.particle(j)->px     << " "
-                                       << ev.particle(j)->py     << " "
-                                       << ev.particle(j)->pz     << " ";
+    for ( j = 0; j < n; ++j ) std::cout << ev.particle(j)->charge << " "
+                                        << ev.particle(j)->px     << " "
+                                        << ev.particle(j)->py     << " "
+                                        << ev.particle(j)->pz     << " ";
     
     std::cout << std::endl;
 
-}
+    }

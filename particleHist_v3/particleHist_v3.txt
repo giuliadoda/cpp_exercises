@@ -3,9 +3,9 @@
 
 ***
 Take the following from "braggPlot_v3":
-- the new versions of "AnalysisSteering.h,cc"
+- the new versions of "AnalysisSteering.h,cc" --> new function update (no more process)
   (and look at the differences with the v2 version),
-- "AnalysisFactory.h,cc".
+- "AnalysisFactory.h,cc". --> same as before
 
 ***
 Modify "EventDump.h,cc" and "ParticleMass.h,cc" taking "braggPlot_v3" as 
@@ -21,22 +21,22 @@ Modify the "main" function to use "AnalysisFactory".
 
 ********* final list of functions *********
 
-main                   modify Hist_v2 or copy braggPlot_v3
+main                   modify Hist_v2 or copy braggPlot_v3    ok
 mass                   copy   Hist_v2
 
 ********* final list of classes   *********
 
                        .h                            .cc
-AnalysisFactory        copy   braggPlot_v3           copy   braggPlot_v3
-AnalysisSteering       copy   braggPlot_v3           copy   braggPlot_v3
-AnalysisInfo           copy   Hist_v2                copy   Hist_v2
-SourceFactory          copy   Hist_v2                copy   Hist_v2
-Event                  copy   Hist_v2                copy   Hist_v2
-EventSource            copy   Hist_v2                copy   Hist_v2
-EventReadFromFile      copy   Hist_v2                copy   Hist_v2
-EventSim               copy   Hist_v2                copy   Hist_v2
+AnalysisFactory        copy   braggPlot_v3   ok        copy   braggPlot_v3    ok
+AnalysisSteering       copy   braggPlot_v3   ok        copy   braggPlot_v3    ok
+AnalysisInfo           copy   Hist_v2        ok        copy   Hist_v2   ok
+SourceFactory          copy   Hist_v2        ok        copy   Hist_v2   ok
+Event                  copy   Hist_v2        ok        copy   Hist_v2   ok
+EventSource            copy   Hist_v2        ok        copy   Hist_v2   ok
+EventReadFromFile      copy   Hist_v2        ok        copy   Hist_v2   ok
+EventSim               copy   Hist_v2        ok        copy   Hist_v2   ok
 EventDump              modify Hist_v2                modify Hist_v2
 ParticleMass           modify Hist_v2                modify Hist_v2
-MassMean               copy   Hist_v2                copy   Hist_v2
-Constants              copy   Hist_v2                copy   Hist_v2
-Utilities              copy   Hist_v2                copy   Hist_v2
+MassMean               copy   Hist_v2        ok        copy   Hist_v2   ok
+Constants              copy   Hist_v2        ok        copy   Hist_v2   ok
+Utilities              copy   Hist_v2        ok        copy   Hist_v2   ok

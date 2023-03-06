@@ -17,7 +17,6 @@ class EventSource {
   // get an event
   virtual const Event* get() = 0;
 
-};
+  };
 
 #endif
-

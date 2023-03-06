@@ -109,7 +109,6 @@ dump                   copy   Dump_v2 --> ok
 mass                   to complete    --> ok
 add                    to do	      --> ok
 
-
 ****** to execute *******
 
-./main FileName
+./main InputFileName

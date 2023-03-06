@@ -5,10 +5,8 @@ class Event {
 
  public:
 
-  // constructor
   Event( int n, float x, float y, float z ); // create an event with number "n" (event id)
                                              // and decay point coordinates x, y, z
-  // destructor
   ~Event();
 
   // composite object Particle to hold all information for each particle
@@ -18,11 +16,12 @@ class Event {
     double px;
     double py;
     double pz;  // particle momentum
-  };
+    };
+  
   typedef const Particle* part_ptr;
 
   // add a particle to the event
-  void add( int charge, double px, double py, double pz );
+  void pAdd( int charge, double px, double py, double pz );
 
   // get event id.
   int eventNumber() const;
@@ -53,6 +52,6 @@ class Event {
 
   const int maxP = 10; // maximum number of particles
 
-};
+  };
 
 #endif

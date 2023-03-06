@@ -2,17 +2,18 @@
 
 #include "Event.h"
 
+
 // function that reads an event returning a pointer to that event 
 // (or nullptr at file's end)
 
-Event* read (std::ifstream& file) {
+const Event* read( std::ifstream& file ) {
 
     // event pointer and identifier
     Event* ev;
     int i;
 
     // read input file and on success create dynamically event
-    if (file >> i) ev = new Event;
+    if ( file >> i ) ev = new Event;
     else return nullptr;            // on failure the function returns nullptr
 
     // filling Event struct with event id 
@@ -33,8 +34,8 @@ Event* read (std::ifstream& file) {
     ev->Ps = new Particle*[m];
 
     // loop over particles
-    int j;
-    for (j=0; j<m; ++j) {
+    unsigned int j;
+    for ( j=0; j<m; ++j ) {
 
         // create dynamically poiter to Particle struct
         Particle* p = new Particle;
@@ -46,8 +47,9 @@ Event* read (std::ifstream& file) {
 
         // filling array of pointers
         ev->Ps[j] = p;
-    }
+
+        }
 
     return ev; // returns the pointer to the event
 
-}
+    }

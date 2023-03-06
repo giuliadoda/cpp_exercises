@@ -1,19 +1,19 @@
 #include "ParticleMass.h"
-#include "AnalysisSteering.h"
 #include "MassMean.h"
+
 #include <vector>
 #include <iostream>
 
 using namespace std;
 
 ParticleMass::ParticleMass() {
-}
+    }
 
 ParticleMass::~ParticleMass() {
-}
+    }
 
-//create and store the pointers to 2 "MassMean" objects 
-//for the 2 decay modes, using the same mass ranges as for previous versions
+// create and store the pointers to 2 "MassMean" objects 
+// for the 2 decay modes, using the same mass ranges as for previous versions
 void ParticleMass::beginJob() {
 
     const double mMinK = 0.495;
@@ -28,10 +28,10 @@ void ParticleMass::beginJob() {
     pList.push_back( K );
     pList.push_back( L );
 
-}
+    }
 
-//loop over the "MassMean" objects and for each one 
-//compute mean and rms masses and print results
+// loop over the "MassMean" objects and for each one 
+// compute mean and rms masses and print results
 void ParticleMass::endJob() {
 
     for ( MassMean* m: pList) {
@@ -44,14 +44,14 @@ void ParticleMass::endJob() {
 
         }
         
-}
+    }
 
-//loop over the "MassMean" objects and for each one 
-//call the "add" function --> update sums 
+// loop over the "MassMean" objects and for each one 
+// call the "add" function --> update sums 
 void ParticleMass::process( const Event& ev ) {
 
     for ( MassMean* n: pList) {
         
         n->add(ev);}
     
-}
+    }

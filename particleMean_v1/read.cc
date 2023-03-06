@@ -2,9 +2,10 @@
 
 #include "Event.h"
 
+
 // function that reads an event returning a pointer to that event
 
-Event* read (std::ifstream& file) {
+const Event* read( std::ifstream& file ) {
 
     // event pointer and identifier
     Event* ev;
@@ -28,16 +29,16 @@ Event* read (std::ifstream& file) {
     ev->Ps = new Particle*[m];
 
     // loop over particles
-    int j;
-    for (j=0; j<m; ++j) {
+    unsigned int j;
+    for ( j=0; j<m; ++j ) {
         Particle* p = new Particle;
         file >> p->charge
              >> p->px
              >> p->py
              >> p->pz;
         ev->Ps[j] = p;
-    }
+        }
 
     return ev; 
 
-}
+    }

@@ -1,14 +1,15 @@
+#include "Event.h"
+#include "MassMean.h"
+
 #include <fstream>
 #include <iostream>
 #include <string>
 
-#include "Event.h"
-#include "MassMean.h"
 
 using namespace std;
 
-void dump (const Event& ev);
-Event* read (ifstream& file);
+void dump( const Event& ev );
+const Event* read( ifstream& file );
 
 int main( int argc, char* argv[] ) {
 
@@ -35,7 +36,7 @@ int main( int argc, char* argv[] ) {
     L0.add(*ev);
 
     delete ev;
-  }
+    }
 
   // compute results
   K0.compute();
@@ -47,4 +48,4 @@ int main( int argc, char* argv[] ) {
 
   return 0;
 
-}
+  }

@@ -44,7 +44,6 @@ main                   to do
 read                   to do
 dump                   to do
 
-
 ****** to execute *******
 
-./main FileName
+./main InputFileName

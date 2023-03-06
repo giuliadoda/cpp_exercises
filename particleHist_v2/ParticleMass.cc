@@ -1,23 +1,24 @@
 #include "ParticleMass.h"
-#include "AnalysisSteering.h"
+
 #include "MassMean.h"
-#include <vector>
-#include <iostream>
-#include "TH1F.h"
 #include "TFile.h"
+
+#include <iostream>
+
 
 using namespace std;
 
-double mass(const Event& ev); // global function to compute invariant mass
+double mass( const Event& ev ); // global function to compute invariant mass
+
 
 ParticleMass::ParticleMass() {
-}
+    }
 
 ParticleMass::~ParticleMass() {
-}
+        }
 
-//create and store the pointers to 2 "MassMean" objects 
-//for the 2 decay modes, using the same mass ranges as for previous versions
+//  create and store the pointers to 2 "MassMean" objects 
+//  for the 2 decay modes, using the same mass ranges as for previous versions
 void ParticleMass::beginJob() {
 
     const double mMinK = 0.495;
@@ -32,13 +33,20 @@ void ParticleMass::beginJob() {
     pCreate(k, mMinK, mMaxK);
     pCreate(l, mMinL, mMaxL);
 
+    return;
+
 }
 
-//loop over the "MassMean" objects and for each one 
-//compute mean and rms masses and print results
+//  loop over the "MassMean" objects and for each one 
+//  compute mean and rms masses and print results
+//  save histogram to file
 void ParticleMass::endJob() {
 
-    for ( Particle* m: pList) {
+    // save histogram to file 
+    TDirectory* currentDir = gDirectory;
+    TFile* file = new TFile("partist.root", "CREATE");
+
+    for ( Particle* m: pList ) {
 
         // compute mean and rms
         m->mptr->compute();
@@ -46,28 +54,30 @@ void ParticleMass::endJob() {
         // print results
         cout << m->mptr->nEvent() << " " << m->mptr->mMean() << " " << m->mptr->mRMS() << endl;
 
-        // save histogram to file 
-        TDirectory* currentDir = gDirectory;
-        TFile* file = new TFile("partist.root", "UPDATE");
+        // fill file with histogram
         m->h->Write();
-        delete file;
-        currentDir->cd();
 
         }
-        
-}
 
-//loop over the "MassMean" objects and for each one 
-//call the "add" function --> update sums 
+    file->Close();
+    delete file;
+    currentDir->cd();
+
+    return;
+        
+    }
+
+// loop over the "MassMean" objects and for each one 
+// call the "add" function --> update sums 
 // and fill histogram
 void ParticleMass::process( const Event& ev ) {
 
-    for ( Particle* n: pList) {
+    for ( Particle* n: pList ) {
         
         // returns true if mass is in range
         bool c = n->mptr->add(ev);
         
-        // filling hist w invariant mass for the accepted event
+        // filling hist with invariant mass for the accepted event
         if (c) {
             double m = mass(ev); 
             n->h->Fill(m);
@@ -75,10 +85,12 @@ void ParticleMass::process( const Event& ev ) {
 
         }
     
-}
+    return;
+
+    }
 
 // create a decay mode --> called in begin job
-void ParticleMass::pCreate(const string& name, const double min, const double max) {
+void ParticleMass::pCreate( const string& name, const double min, const double max ) {
 
     // create name for TH1F 
     const char* hName = name.c_str();
@@ -95,4 +107,4 @@ void ParticleMass::pCreate(const string& name, const double min, const double ma
 
     return;
 
-}
+    }

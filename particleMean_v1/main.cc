@@ -4,16 +4,18 @@
 
 #include "Event.h"
 
-const Event* read (std::ifstream& file);
-void dump (const Event& ev);
-double mass (const Event& ev);
-bool add (const Event& ev, double mMin, double mMax, double& sum, double& sqr);
-void clear (const Event* ev);
 
-int main (int argc, char* argv[]) {
+const Event* read( std::ifstream& file );
+void dump( const Event& ev );
+double mass( const Event& ev );
+bool add( const Event& ev, double mMin, double mMax, double& sum, double& sqr );
+void clear( const Event* ev );
+
+
+int main( int argc, char* argv[] ) {
 
     const char* name = argv[1];
-    std::ifstream file (name);
+    std::ifstream file( name );
 
     int aev = 0;    // accepted events
     double sum = 0; // sum of invariant masses
@@ -27,19 +29,19 @@ int main (int argc, char* argv[]) {
 
     // loop over events
     const Event* ev;
-    while ( (ev = read(file) ) != nullptr ) {
+    while ( ( ev = read(file) ) != nullptr ) {
         // dump(*ev);
-        if (add(*ev, mMin, mMax, sum, sqr)) ++aev;
+        if ( add(*ev, mMin, mMax, sum, sqr) ) ++aev;
         clear(ev);
-    }
+        }
 
     // computing mass mean and rms
-    mm = sum*1./aev;
-    double r = sqr*1./aev - pow( mm, 2 );
-    rms = (r > 0 ? sqrt(r) : 0.0);
+    mm = sum * 1./aev;
+    double r = sqr * 1./aev - pow( mm, 2 );
+    rms = ( r > 0 ? sqrt(r) : 0.0 );
 
-    std::cout << (mm+mMin) << "   " << rms << std::endl;
+    std::cout << (mm + mMin) << "   " << rms << std::endl;
 
     return 0;
 
-}
+    }

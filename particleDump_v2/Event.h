@@ -6,7 +6,7 @@ struct Particle {
     float px;   // momenta components
     float py;
     float pz;   
-};
+    };
 
 struct Event {
     int evNumber;   // event number identifier
@@ -15,7 +15,6 @@ struct Event {
     float z;        
     int n;          // number of particles
     Particle** Ps;  // array of pointers to Particle struct
-};
-
+    };
 
 #endif

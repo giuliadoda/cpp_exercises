@@ -1,14 +1,14 @@
-#include <vector>
-#include <string>
-#include <sstream>
-#include <iostream>
-
 #include "Event.h"
 #include "EventReadFromFile.h"
 #include "EventSim.h"
 #include "AnalysisSteering.h"
 #include "EventDump.h"
 #include "ParticleMass.h"
+
+#include <vector>
+#include <string>
+#include <sstream>
+
 
 using namespace std;
 
@@ -66,12 +66,12 @@ int main( int argc, char* argv[] ) {
     delete ev;
   }
 
-  // finalize all analyzers: compute mean and rms and print event id w results
+  // finalize all analyzers: 
+  // compute mean and rms and print event id with results
   for ( auto as: aList ) as->endJob();
 
   delete es;
 
   return 0;
 
-}
-
+  }

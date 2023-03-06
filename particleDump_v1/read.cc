@@ -9,21 +9,20 @@ int read( std::ifstream& file,  // input file
             int* charges,       // particles charges
             float* px,          // momenta components
             float* py,
-            float* pz) {
+            float* pz ) {
 
     int n; // number of particles producted in that decay
 
-    file >> x_decay >> y_decay >> z_decay; // reading decay coordinates
+    file >> x_decay >> y_decay >> z_decay   // reading decay point coordinates
+                               >> n;        // reading number of particles producted
 
-    file >> n; // reading number of particles producted
-
-    // loop opver particles
-    int i;
-    for (i = 0; i < n; ++i) {
+    // loop over particles
+    unsigned int i;
+    for ( i = 0; i < n; ++i ) {
         file >> charges[i];
         file >> px[i] >> py[i] >> pz[i];
-    }
+        }
     
     return n;
 
-}
+    }

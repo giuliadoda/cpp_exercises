@@ -2,10 +2,12 @@
 #define ParticleMass_h
 
 #include "AnalysisSteering.h"
-#include <vector>
 #include "TH1F.h"
 
+#include <vector>
+
 using namespace std;
+
 
 class MassMean;
 
@@ -39,6 +41,7 @@ class ParticleMass: public AnalysisSteering {
     private:
 
         vector<Particle*> pList;
-};
+        
+    };
 
 #endif

@@ -23,6 +23,6 @@ class EventDump: public AnalysisSteering {
   // function to be called for each event
   void process( const Event& ev ) override;
 
-};
+  };
 
 #endif

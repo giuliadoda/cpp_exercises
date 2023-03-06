@@ -2,8 +2,8 @@
 
 
 EventSource::EventSource() {
-}
+    }
 
 
 EventSource::~EventSource() {
-}
+    }
