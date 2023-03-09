@@ -29,7 +29,7 @@ vector<AnalysisSteering*> AnalysisFactory::create( const AnalysisInfo* info ) {
 
 // function to add analyzer concrete factories
 void AnalysisFactory::registerFactory( const string& name, AbsFactory* b ) {
-  static map<string,AbsFactory*>& fm = *factoryMap(); // viene dichiarata la prima volta che serve poi è sempre quella
+  static map<string,AbsFactory*>& fm = *factoryMap(); 
   fm[name] = b;
   return;
 }

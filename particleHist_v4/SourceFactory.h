@@ -19,7 +19,7 @@ class SourceFactory {
   virtual ~SourceFactory();
 
   // create event source
-  static EventSource* create( const AnalysisInfo* info ); // static --> non è necessario creare l'oggetto
+  static EventSource* create( const AnalysisInfo* info ); 
 
 };
 

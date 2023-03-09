@@ -30,7 +30,7 @@ const string& AnalysisInfo::value( const string& key ) const {
   int n = args.size() - 1;
   while ( i < n ) {
     // if word is equal to key, return next word
-    if ( args[i++] == key ) return args[i]; // nb operatore postfisso
+    if ( args[i++] == key ) return args[i]; 
   }
   // if key not found, return a default string (empty)
   return defaultString;

@@ -20,15 +20,18 @@ Move all the source files to those directories:
   SourceFactory.h,cc
   AnalysisSteering.h,cc
   AnalysisFactory.h,cc
+
 - to AnalysisUtilities:
   Constants.h,cc
   Utilities.h,cc
   QuadraticFitter.h,cc
+
 - to AnalysisObjects:
   ParticleReco.h,cc
   ProperTime.h,cc
   MassMean.h,cc
   LifetimeFit.h,cc
+
 - to AnalysisPlugins:
   EventDump.h,cc
   ParticleMass.h,cc

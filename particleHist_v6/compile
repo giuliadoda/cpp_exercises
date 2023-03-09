@@ -1,0 +1,89 @@
+#!/bin/sh
+
+cd ../../corsocxx
+export CORSOCXX_UTIL=`pwd`
+cd ../exercises/particleHist_v6
+export ANALYSIS_PATH=`pwd`
+
+#####################################################################
+
+export LIB_NAME=AnalysisFramework
+echo "compile " ${LIB_NAME}
+cd ${ANALYSIS_PATH}/${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so *.cc
+
+export LIB_NAME=AnalysisObjects
+echo "compile " ${LIB_NAME}
+cd ${ANALYSIS_PATH}/${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so *.cc -L ${ANALYSIS_PATH} -l AnalysisFramework -l AnalysisUtilities 
+
+export LIB_NAME=AnalysisUtilities
+echo "compile " ${LIB_NAME}
+cd ${ANALYSIS_PATH}/${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so *.cc
+
+#####################################################################
+
+cd ${ANALYSIS_PATH}/AnalysisPlugins
+
+export LIB_NAME=EventDump
+echo "compile " ${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so ${LIB_NAME}.cc -L ${ANALYSIS_PATH} -l AnalysisFramework -l AnalysisUtilities -l AnalysisObjects 
+
+export LIB_NAME=ParticleMass
+echo "compile " ${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+`root-config --cflags`      \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so ${LIB_NAME}.cc -L ${ANALYSIS_PATH} -l AnalysisFramework -l AnalysisUtilities -l AnalysisObjects `root-config --libs`
+
+export LIB_NAME=ParticleLifetime
+echo "compile " ${LIB_NAME}
+rm -f ${ANALYSIS_PATH}/lib${LIB_NAME}.so
+c++ -Wall -std=c++11 -fPIC -shared -I. -I ${CORSOCXX_UTIL} -I ${ANALYSIS_PATH} \
+`root-config --cflags`      \
+-o ${ANALYSIS_PATH}/lib${LIB_NAME}.so ${LIB_NAME}.cc -L ${ANALYSIS_PATH} -l AnalysisFramework -l AnalysisUtilities -l AnalysisObjects `root-config --libs`
+
+#####################################################################
+
+cd ${ANALYSIS_PATH}
+
+export EXE_NAME=runDump
+echo "compile " ${EXE_NAME}
+rm -f ${EXE_NAME}
+c++ -Wall -std=c++11 -fPIC -I. -I ${ANALYSIS_PATH} -I ${CORSOCXX_UTIL} \
+-o ${EXE_NAME} dummy.cc -L ${ANALYSIS_PATH}        \
+-l AnalysisFramework -l AnalysisObjects -l AnalysisUtilities           \
+-l EventDump 
+
+export EXE_NAME=runMass
+echo "compile " ${EXE_NAME}
+rm -f ${EXE_NAME}
+c++ -Wall -std=c++11 -fPIC -I. -I ${ANALYSIS_PATH} -I ${CORSOCXX_UTIL}         \
+-o ${EXE_NAME} dummy.cc -L ${ANALYSIS_PATH}        \
+-l AnalysisFramework -l AnalysisObjects -l AnalysisUtilities           \
+-l ParticleMass `root-config --libs`
+
+export EXE_NAME=runTime
+echo "compile " ${EXE_NAME}
+rm -f ${EXE_NAME}
+c++ -Wall -std=c++11 -fPIC -I. -I ${ANALYSIS_PATH} -I ${CORSOCXX_UTIL}         \
+-o ${EXE_NAME} dummy.cc -L ${ANALYSIS_PATH}        \
+-lAnalysisFramework -l AnalysisObjects -l AnalysisUtilities           \
+-lParticleLifetime `root-config --libs`
+
+export EXE_NAME=runAll
+echo "compile " ${EXE_NAME}
+rm -f ${EXE_NAME}
+c++ -Wall -std=c++11 -fPIC -I. -I ${ANALYSIS_PATH} -I ${CORSOCXX_UTIL}         \
+-o ${EXE_NAME} dummy.cc -L ${ANALYSIS_PATH}       \
+-lAnalysisFramework -l AnalysisObjects -l AnalysisUtilities           \
+-lEventDump -l ParticleLifetime -l ParticleMass `root-config --libs`

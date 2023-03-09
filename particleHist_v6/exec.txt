@@ -1,0 +1,7 @@
+for example
+
+./runAll input ../particle_events.txt plot massRanges massHisto.root time particleFitters timeHisto.root
+
+or
+
+./runAll sim 1500 plot massRanges massHistoSim.root time particleFitters timeHistoSim.root

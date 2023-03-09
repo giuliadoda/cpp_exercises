@@ -105,5 +105,4 @@ double mass( const Event& ev ) {
         }
     else return -1;
 
-  
   }

@@ -28,6 +28,8 @@ void ParticleMass::beginJob() {
     pList.push_back( K );
     pList.push_back( L );
 
+    return;
+
     }
 
 // loop over the "MassMean" objects and for each one 
@@ -43,6 +45,8 @@ void ParticleMass::endJob() {
         cout << m->nEvent() << " " << m->mMean() << " " << m->mRMS() << endl;
 
         }
+
+    return;
         
     }
 
@@ -50,8 +54,8 @@ void ParticleMass::endJob() {
 // call the "add" function --> update sums 
 void ParticleMass::process( const Event& ev ) {
 
-    for ( MassMean* n: pList) {
-        
-        n->add(ev);}
+    for ( MassMean* n: pList) n->add(ev);
+
+    return;
     
     }

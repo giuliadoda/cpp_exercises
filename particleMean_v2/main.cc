@@ -15,7 +15,7 @@ int main( int argc, char* argv[] ) {
   const char* name = argv[1];
   std::ifstream file( name );
 
-  // create MassMean objects (with mass range passed to constructor)
+  // create MassMean objects 
   const double mMinK = 0.495;
   const double mMaxK = 0.500;
 

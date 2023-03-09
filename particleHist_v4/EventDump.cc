@@ -64,5 +64,7 @@ void EventDump::update( const Event& ev ) {
       }
     
     cout << endl;
+
+    return;
     
     }

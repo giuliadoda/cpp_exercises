@@ -38,7 +38,7 @@ class Event {
 
   // get particle
   const Particle* particle( unsigned int i ) const; // returning the pointer to the 
-                                                          // corresponding particle (otherwise nullptr)
+                                                    // corresponding particle (otherwise nullptr)
 
  private:
 

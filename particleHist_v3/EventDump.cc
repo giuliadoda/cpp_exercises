@@ -64,5 +64,7 @@ void EventDump::process( const Event& ev ) {
       }
     
     cout << endl;
+
+    return;
     
     }
