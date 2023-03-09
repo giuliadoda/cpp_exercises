@@ -1,15 +1,15 @@
-#ifndef ParticleReco_h
-#define ParticleReco_h
+#ifndef ProperTime_h
+#define ProperTime_h
 
 #include "Event.h"
 #include "util/include/Singleton.h"
 #include "util/include/LazyObserver.h"
 
 
-class ParticleReco: public Singleton<ParticleReco>,
+class ProperTime: public Singleton<ProperTime>,
                     public LazyObserver<Event> {
 
-  friend class Singleton<ParticleReco>;
+  friend class Singleton<ProperTime>;
 
  public:
 
@@ -25,17 +25,19 @@ class ParticleReco: public Singleton<ParticleReco>,
   double pEnergy();
   // return particle mass
   double pMass();
+  // return time
+  double decayTime();
 
  private:
 
   // private constructor and destructor for singleton
-  ParticleReco();
+  ProperTime();
   // deleted copy constructor and assignment to prevent unadvertent copy
-  ParticleReco           ( const ParticleReco& x ) = delete;
-  ParticleReco& operator=( const ParticleReco& x ) = delete;
+  ProperTime           ( const ProperTime& x ) = delete;
+  ProperTime& operator=( const ProperTime& x ) = delete;
 
   // destructor
-  ~ParticleReco() override;
+  ~ProperTime() override;
 
   // particle type
   ParticleType type;
@@ -43,6 +45,8 @@ class ParticleReco: public Singleton<ParticleReco>,
   double totEnergy;
   // particle mass
   double invMass;
+  // decay time
+  double time;
 
 };
 

@@ -6,53 +6,53 @@
 
 ***
 Download the "Utilities" package and install it somewhere, then 
-add the corresponding path in the compilation:
+add the corresponding path in the compilation: 
 cd ..../corsocxx
 tar -xzf util.tgz
 c++ -I ..../corsocxx
 
 ***
-In "AnalysisSteering.h" remove the "process" function declaration.
+In "AnalysisSteering.h" remove the "process" function declaration. OK
 
 ***
 In "EventDump.h,cc" and "ParticleMass.h,cc":
 - include the Observer header:
-#include "util/include/ActiveObserver.h"
-- inherit from "ActiveObserver<Event>" in addition to the existing base,
-- rename the function "process" as "update".
+#include "util/include/ActiveObserver.h" OK
+- inherit from "ActiveObserver<Event>" in addition to the existing base, OK
+- rename the function "process" as "update". OK
 
 ***
 In "EventSource.h,cc":
-- declare the "get" function as "private",
-- declare and implement a "public" function "run",
-- move the event loop from the "main" function to the new "run" function,
-  and use "Dispatcher<Event>::notify" in the event loop.
+- declare the "get" function as "private", OK 
+- declare and implement a "public" function "run", OK 
+- move the event loop from the "main" function to the new "run" function, OK 
+  and use "Dispatcher<Event>::notify" in the event loop. OK 
 
 ***
 Create a class "ParticleReco" to compute total energy and invariant mass:
-- declare it to inherit from the template "Singleton" in the util directory,
-- declare it to inherit from "LazyObserver",
+- declare it to inherit from the template "Singleton" in the util directory, OK
+- declare it to inherit from "LazyObserver", OK
 - declare 3 private member variables for the decay properties
-    decay type (an enum),
-    total energy,
-    invariant mass,
+    decay type (an enum), OK
+    total energy, OK
+    invariant mass, OK
 - compute those variables in the "update" function, using the code formerly
-  in the "mass" global function,
+  in the "mass" global function, OK
 - declare and implement functions to check for new events and return the
-  decay properties.
+  decay properties. OK
 
 ***
 In "MassMean.cc" and "ParticleMass.cc" get the invariant mass from
 "ParticleReco" by getting the instance of it and calling the function
-returning the invariant mass.
+returning the invariant mass. OK
 
 ***
 In "ParticleMass.cc" name the histogram as "mass" followed by the name
-given as first parameter in the "pCreate" function.
+given as first parameter in the "pCreate" function. OK
 
 ***
 Modify the "main" function and replace the event loop with a call to 
-the "run" function in the "EventSource".
+the "run" function in the "EventSource". OK
 
 
 
@@ -61,10 +61,10 @@ the "run" function in the "EventSource".
 
 ***
 Add a new quantity "lightVelocity" in Constants.h,cc and set it at
-0.029979246 cm/ps
+0.029979246 cm/ps OK
 
 ***
-Duplicate the following classes:
+Duplicate the following classes:        OK
 ParticleReco -> ProperTime
 MassMean     -> LifetimeFit
 ParticleMass -> ParticleLifetime
@@ -75,7 +75,7 @@ and   YYY is the new      class (e.g. ProperTime)
 
 ***
 In "ProperTime.h" declare a member variable "time" and a function "decayTime"
-returning it after checking for new event.
+returning it after checking for new event. OK
 In "ProperTime.cc" in the "update" function compute the decay proper time
 from the distance "d" of the decay point from the origin using the formula:
 t = d*m/(p*c) --> è ragionevole mettere il valore vero della massa della particella se vogliamo
@@ -83,33 +83,39 @@ where "m" is the invariant mass, "c" the light velocity and "p" the momentum,
 given in turn by
 p = sqrt(e^2-m^2) --> bisogna mettere il valore calcolato della massa della particella (altrimenti gli errori non vanno bene)
 where "e" is the total energy; get the invariant mass and the total energy
-from "ParticleReco".
+from "ParticleReco".      OK
 
 ***
 In "LifetimeFit.h" declare the same member variables and functions as in
 "MassMean", but remove the member variables to hold sums, mean and rms
 and the functions returning them; leave the member variables to hold
 min. and max. mass and number of events plus the function returning this
-last number.
+last number. OK
 In "LifetimeFit.cc" in the "add" function simply check if the invariant mass
 is inside the range and update the number of accepted events accordingly;
-the function "compute" can be left empty.
+the function "compute" can be left empty. OK
 
 ***
 In "ParticleLifetime.h" replace the pointer to "MassMean" with a pointer
 to "LifetimeFit" in the "Particle" struct and add two more parameters
 "timeMin" and "timeMax" to the "pCreate" function, for min. and max.
-decay proper time.
-In "ParticleLifetime.cc" in the "beginJob" function call "pCreate" with
+decay proper time. OK
+In "ParticleLifetime.cc" 
+
+in the "beginJob" function call "pCreate" with
 the same arguments as in "ParticleMass", plus the min. and max. time
-(use 10.0-500.0 and 10.0-1000.0 as ranges); in the "endJob" function
+(use 10.0-500.0 and 10.0-1000.0 as ranges); OK
+
+in the "endJob" function
 leave the same operations as in "ParticleMass" but the writing of mean
 and rms (leave the call to the "compute" function, that does not anything
 for now, it will be implemented in the next version); get from the 
-"AnalysisInfo" object the name of the output ROOT file.
+"AnalysisInfo" object the name of the output ROOT file. OK
+
 In the "pCreate" function name the histogram as "time" followed by the name
 given as first parameter in the "pCreate" function and use the min. and max.
 decay times as range.
+
 In the "update" function call the "add" function of the "LifetimeFit" object,
 and fill the histogram according to the result (use the same logic as in
 "ParticleMass").
