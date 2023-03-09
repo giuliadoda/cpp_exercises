@@ -4,7 +4,7 @@
 **** Part A ****
 
 ***
-Use the "Utilities" package already downloaded in version 4
+Use the "Utilities" package already downloaded in version 4 OK
 
 ***
 In "AnalysisSteering.h" remove the "process" function declaration.
@@ -30,7 +30,7 @@ In "ParticleMass.cc":
 
 *** Include lifetim max. likelihood fit ***
 
-In "LifetimeFit.h":
+In "LifetimeFit.h":					OK
 - add the following private members:
   * min and max time range (2 doubles),
   * min and max scan range (2 doubles),

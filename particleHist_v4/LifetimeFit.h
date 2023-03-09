@@ -20,7 +20,7 @@ class LifetimeFit {
 
  private:
 
-  double mMin; // min time 
+  double mMin; // min mass 
   double mMax; // max mass
 
   int aev; // number of accepted events
